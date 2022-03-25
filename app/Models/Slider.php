@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+use function PHPSTORM_META\map;
+
+class Slider extends Model
+{
+    use HasFactory;
+    protected $table = 'sliders';
+    protected $fillable = [
+        'slider_img',
+        'slider_label',
+        'slider_desc'
+    ];
+}

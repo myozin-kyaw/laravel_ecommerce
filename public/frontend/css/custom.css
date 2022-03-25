@@ -1,0 +1,141 @@
+:root {
+    --deep-main-color: #ffde07;
+    --light-main-color: #e2d686;
+    --main-color: #f5de47;
+    --black: #000;
+    --white: #fff;
+}
+
+* {
+    outline: none;
+    border: none;
+    color: var(--black);
+    font-family: 'Readex Pro', sans-serif;
+    user-select: none;
+}
+
+body {
+    max-width: 100%;
+}
+
+.btn-main {
+    color: var(--black);
+    background-color: var(--main-color);
+}
+
+.btn-main:hover {
+    background-color: var(--deep-main-color);
+}
+
+.text-main {
+    color: var(--main-color);
+}
+
+.bg-main {
+    background-color: var(--main-color);
+}
+
+.text-gray {
+    color: #aaa;
+}
+
+img.trendImg {
+    height: 300px;
+    width: auto;
+}
+
+.carousel-inner img {
+    height: 70vh;
+}
+
+a {
+    color: var(--black);
+    text-decoration: none;
+}
+
+nav.main-nav {
+    border-bottom: 2px solid #eee;
+    padding: 0 2.5rem;
+}
+
+.navbar ul li .active {
+    border-bottom: 3px solid var(--main-color);
+}
+
+nav.main-nav ul li a.main-nav-a {
+    padding: .8rem 0;
+}
+
+.fa-heart, .fa-shopping-cart {
+    color: var(--white);
+}
+
+img.cartImg {
+    height: 80px;
+    width: auto;
+}
+
+table.cartTable td,
+table.my-orderTable td,
+table.viewOrderTable td {
+    vertical-align: middle;
+}
+
+img.viewOrder {
+    height: 5rem;
+    width: auto;
+}
+
+.viewOrderLabel label {
+    font-weight: bold;
+}
+
+h4.orderViewHead {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* rating */
+.rating-css div {
+    color: #ffe400;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+.rating-css div label {
+    color: #ffe400;
+}
+.rating-css input {
+    display: none;
+}
+.rating-css input + label {
+    font-size: 60px;
+    text-shadow: 1px 1px 0 #8f8420;
+    cursor: pointer;
+}
+.rating-css input:checked + label ~ label {
+    color: #b4afaf;
+}
+.rating-css label:active {
+    transform: scale(0.8);
+    transition: 0.3s ease;
+}
+
+/* End of Star Rating */
+
+.checked {
+    color: #ffe400;
+}
+
+.review-body {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.search-bar {
+    margin-left: 10%;
+    width: 40%;
+}
