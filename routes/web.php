@@ -64,7 +64,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::resource('products', 'Admin\ProductController')->names('products');
     
     Route::get('/user-orders', 'Admin\AdminOrderController@index');
-    Route::get('/view-orderByAdmin/{id}', 'Admin\AdminOrderController@viewOrder');
+    Route::get('/view-orderbyadmin/{id}', 'Admin\AdminOrderController@viewOrder');
 
     Route::put('/order-deliver/{id}', 'Admin\AdminOrderController@orderDeliver');
     Route::put('/order-cancel/{id}', 'Admin\AdminOrderController@orderCancel');

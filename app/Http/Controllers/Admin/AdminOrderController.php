@@ -15,13 +15,13 @@ class AdminOrderController extends Controller
     public function index()
     {
         $orders = Order::where('status','0')->get();
-        return view('admin.userOrders.index', compact('orders'));
+        return view('admin.userorders.index', compact('orders'));
     }
 
     public function viewOrder($id)
     {
         $orders = Order::where('id', $id)->first();
-        return view('admin.userOrders.viewOrder', compact('orders'));
+        return view('admin.userorders.vieworder', compact('orders'));
     }
 
     public function orderDeliver(Request $request, $id)
@@ -53,6 +53,6 @@ class AdminOrderController extends Controller
     public function orderHistory()
     {
         $orders = Order::where('status', '!=', '3')->get();
-        return view('admin.userOrders.orderHistory', compact('orders'));
+        return view('admin.userorders.orderhistory', compact('orders'));
     }
 }

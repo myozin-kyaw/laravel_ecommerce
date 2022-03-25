@@ -59,7 +59,7 @@
                                 @endif
                             </td>
                             <td>{{ date('d-m-Y', strtotime($item->created_at)) }} / {{ date('H:i:s', strtotime($item->created_at)) }}</td>
-                            <td><a href="{{ url('/view-orderByAdmin/'.$item->id) }}" class="btn btn-warning">View</a></td>
+                            <td><a href="{{ url('/view-orderbyadmin/'.$item->id) }}" class="btn btn-warning">View</a></td>
 
                         </tr>
 

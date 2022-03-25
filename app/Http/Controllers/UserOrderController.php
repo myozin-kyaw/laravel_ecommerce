@@ -17,7 +17,7 @@ class UserOrderController extends Controller
     public function viewOrder($id)
     {
         $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
-        return view('frontend.order.viewOrder', compact('orders'));
+        return view('frontend.order.vieworder', compact('orders'));
     }
 
     public function orderAccepted(Request $request, $id)

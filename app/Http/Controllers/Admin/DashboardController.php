@@ -12,12 +12,12 @@ class DashboardController extends Controller
     {
         $admins = User::where('role_as','1')->get();
         $users = User::where('role_as','0')->get();
-        return view('admin.users.myUsers', compact('admins', 'users'));
+        return view('admin.users.myusers', compact('admins', 'users'));
     }
 
     public function viewUser($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.users.viewUser', compact('user'));
+        return view('admin.users.viewuser', compact('user'));
     }
 }

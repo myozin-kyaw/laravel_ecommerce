@@ -55,7 +55,7 @@ class FrontendController extends Controller
                 } else {
                     $rating_value = 0;
                 }
-                return view('frontend.product.viewProduct', compact('category', 'product','ratings','rating_value','user_rating','customer_review'));
+                return view('frontend.product.viewproduct', compact('category', 'product','ratings','rating_value','user_rating','customer_review'));
             } else {
                 return redirect('/')->with('status', "Your Click Product doesn't exit");
             }
