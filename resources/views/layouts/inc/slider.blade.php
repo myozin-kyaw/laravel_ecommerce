@@ -1,11 +1,3 @@
-<style>
-
-  h5 {
-    font-weight: bold;
-  }
-
-</style>
-
 @if(count($sliders) != 3)
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
