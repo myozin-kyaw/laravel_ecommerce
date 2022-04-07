@@ -17,10 +17,11 @@ class FrontendController extends Controller
     {
         $feature_products = Product::where('trending', '1')->take(15)->get();
         $popular_category = Category::where('popular', '1')->take(15)->get();
+        $sliders = Slider::all();
         $fSlider = Slider::first();
         $mSlider = Slider::skip(1)->take(1)->first();
         $lSlider = Slider::skip(2)->take(1)->first();
-        return view('frontend.index', compact('feature_products', 'popular_category', 'fSlider', 'mSlider', 'lSlider'));
+        return view('frontend.index', compact('feature_products', 'popular_category', 'sliders', 'fSlider', 'mSlider', 'lSlider'));
     }
 
     public function category()

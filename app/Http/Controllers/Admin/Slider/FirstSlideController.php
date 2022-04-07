@@ -87,7 +87,7 @@ class FirstSlideController extends Controller
         if ($file) {
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs(
-                'sliders', $filename
+                '/sliders', $filename
             );
             if ($fSlider->slider_img) {
                 Storage::delete('sliders/'.$fSlider->slider_img);
