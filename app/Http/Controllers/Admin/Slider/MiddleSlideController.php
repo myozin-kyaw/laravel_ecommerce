@@ -16,8 +16,9 @@ class MiddleSlideController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::get();
-        return view('admin.slider.middleIndex', compact('sliders'));
+        // $sliders = Slider::get();
+        // return view('admin.slider.middleIndex', compact('sliders'));
+        return redirect(route('slides'));
     }
 
     /**
@@ -38,17 +39,17 @@ class MiddleSlideController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = new Slider();
-        $file = $request->hasFile('m_Slide');
-        if ($file) {
-            $newFile = $request->file('m_Slide');
-            $file_path = $newFile->store('sliders');
-            $slider->slider_img = $file_path;
-        }
-        $slider->slider_label = $request->m_label;
-        $slider->slider_desc = $request->m_desc;
-        $slider->save();
-        return redirect('/slide')->with('status','Middle Slide created successfully');
+        $file = $request->m_Slide;
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs(
+            'sliders', $filename
+        );
+        Slider::create([
+            'slider_label' => $request->m_label,
+            'slider_desc' => $request->m_desc,
+            'slider_img' => $filename
+        ]);
+        return redirect(route('slides'))->with('status','Middle Slide created successfully');
     }
 
     /**
@@ -59,7 +60,7 @@ class MiddleSlideController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect(route('slides'));
     }
 
     /**
@@ -83,21 +84,25 @@ class MiddleSlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $file = $request->hasFile('m_Slide');
+        $mSlider = Slider::findOrFail($id);
+        $file = $request->file('m_Slide');
         if ($file) {
-            $path = '/Storage/'.$slider->slider_img;
-            if (file_exists($path)) {
-                Storage::delete('/Storage/'.$slider->slider_img);
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs(
+                'sliders', $filename
+            );
+            if ($mSlider->slider_img) {
+                Storage::delete('sliders/'.$mSlider->slider_img);
             }
-            $newFile = $request->file('m_Slide');
-            $file_path = $newFile->store('sliders');
-            $slider->slider_img = $file_path;
+        } else {
+            $filename = $mSlider->slider_img;
         }
-        $slider->slider_label = $request->m_label;
-        $slider->slider_desc = $request->m_desc;
-        $slider->save();
-        return redirect('/slide')->with('status','Middle Slide updated successfully');
+        $mSlider->update([
+            'slider_label' => $request->m_label,
+            'slider_desc' => $request->m_desc,
+            'slider_img' => $filename
+        ]);
+        return redirect(route('slides'))->with('status','Middle Slide updated successfully');
     }
 
     /**
@@ -108,6 +113,6 @@ class MiddleSlideController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect(route('slides'));
     }
 }

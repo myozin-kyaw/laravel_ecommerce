@@ -16,8 +16,9 @@ class LastSlideController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::get();
-        return view('admin.slider.lastIndex', compact('sliders'));
+        // $sliders = Slider::get();
+        // return view('admin.slider.lastIndex', compact('sliders'));
+        return redirect(route('slides'));
     }
 
     /**
@@ -38,17 +39,17 @@ class LastSlideController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = new Slider();
-        $file = $request->hasFile('l_Slide');
-        if ($file) {
-            $newFile = $request->file('l_Slide');
-            $file_path = $newFile->store('sliders');
-            $slider->slider_img = $file_path;
-        }
-        $slider->slider_label = $request->l_label;
-        $slider->slider_desc = $request->l_desc;
-        $slider->save();
-        return redirect('/slide')->with('status','Last Slide created successfully');
+        $file = $request->l_Slide;
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs(
+            'sliders', $filename
+        );
+        Slider::create([
+            'slider_label' => $request->l_label,
+            'slider_desc' => $request->l_desc,
+            'slider_img' => $filename
+        ]);
+        return redirect(route('slides'))->with('status','Last Slide created successfully');
     }
 
     /**
@@ -59,7 +60,7 @@ class LastSlideController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect(route('slides'));
     }
 
     /**
@@ -83,21 +84,25 @@ class LastSlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $file = $request->hasFile('l_Slide');
+        $lSlider = Slider::findOrFail($id);
+        $file = $request->file('l_Slide');
         if ($file) {
-            $path = '/Storage/'.$slider->slider_img;
-            if (file_exists($path)) {
-                Storage::delete('/Storage/'.$slider->slider_img);
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs(
+                'sliders', $filename
+            );
+            if ($lSlider->slider_img) {
+                Storage::delete('sliders/'.$lSlider->slider_img);
             }
-            $newFile = $request->file('l_Slide');
-            $file_path = $newFile->store('sliders');
-            $slider->slider_img = $file_path;
+        } else {
+            $filename = $lSlider->slider_img;
         }
-        $slider->slider_label = $request->l_label;
-        $slider->slider_desc = $request->l_desc;
-        $slider->save();
-        return redirect('/slide')->with('status','Last Slide updated successfully');
+        $lSlider->update([
+            'slider_label' => $request->l_label,
+            'slider_desc' => $request->l_desc,
+            'slider_img' => $filename
+        ]);
+        return redirect(route('slides'))->with('status','Last Slide updated successfully');
     }
 
     /**
@@ -108,6 +113,6 @@ class LastSlideController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect(route('slides'));
     }
 }

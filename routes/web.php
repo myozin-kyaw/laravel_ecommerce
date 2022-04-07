@@ -73,7 +73,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/my-users', 'Admin\DashboardController@myUsers');
     Route::get('/view-user/{id}', 'Admin\DashboardController@viewUser');
 
-    Route::get('/slide', 'Admin\FrontendController@sliderIndex');
+    Route::get('/slide', 'Admin\FrontendController@sliderIndex')->name('slides');
     Route::resource('/slide/firstSlide', 'Admin\Slider\FirstSlideController')->names('firstSlide');
     Route::resource('slide/middleSlide', 'Admin\Slider\MiddleSlideController')->names('middleSlide');
     Route::resource('/slide/lastSlide', 'Admin\Slider\LastSlideController')->names('lastSlide');

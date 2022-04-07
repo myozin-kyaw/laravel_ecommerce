@@ -16,7 +16,7 @@ class FirstSlideController extends Controller
      */
     public function index()
     {
-        //
+        return redirect(route('slides'));
     }
 
     /**
@@ -37,17 +37,17 @@ class FirstSlideController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = new Slider();
-        $file = $request->hasFile('f_Slide');
-        if ($file) {
-            $newFile = $request->file('f_Slide');
-            $file_path = $newFile->store('sliders');
-            $slider->slider_img = $file_path;
-        }
-        $slider->slider_label = $request->f_label;
-        $slider->slider_desc = $request->f_desc;
-        $slider->save();
-        return redirect('/slide')->with('status','First Slide created successfully');
+        $file = $request->f_Slide;
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs(
+            'sliders', $filename
+        );
+        Slider::create([
+            'slider_label' => $request->f_label,
+            'slider_desc' => $request->f_desc,
+            'slider_img' => $filename
+        ]);
+        return redirect(route('slides'))->with('status','First Slide created successfully');
     }
 
     /**
@@ -58,7 +58,7 @@ class FirstSlideController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect(route('slides'));
     }
 
     /**
@@ -69,7 +69,7 @@ class FirstSlideController extends Controller
      */
     public function edit($id)
     {
-        $fSlider = Slider::first();
+        $fSlider = Slider::findOrFail($id);
         return view('admin.slider.update.firstSlide', compact('fSlider'));
     }
 
@@ -82,21 +82,25 @@ class FirstSlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $file = $request->hasFile('f_Slide');
+        $fSlider = Slider::findOrFail($id);
+        $file = $request->file('f_Slide');
         if ($file) {
-            $path = '/Storage/'.$slider->slider_img;
-            if (file_exists($path)) {
-                Storage::delete('/Storage/'.$slider->slider_img);
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs(
+                'sliders', $filename
+            );
+            if ($fSlider->slider_img) {
+                Storage::delete('sliders/'.$fSlider->slider_img);
             }
-            $newFile = $request->file('f_Slide');
-            $file_path = $newFile->store('sliders');
-            $slider->slider_img = $file_path;
+        } else {
+            $filename = $fSlider->slider_img;
         }
-        $slider->slider_label = $request->f_label;
-        $slider->slider_desc = $request->f_desc;
-        $slider->save();
-        return redirect('/slide')->with('status','First Slide updated successfully');
+        $fSlider->update([
+            'slider_label' => $request->f_label,
+            'slider_desc' => $request->f_desc,
+            'slider_img' => $filename
+        ]);
+        return redirect(route('slides'))->with('status','First Slide updated successfully');
     }
 
     /**
@@ -107,6 +111,6 @@ class FirstSlideController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect(route('slides'));
     }
 }

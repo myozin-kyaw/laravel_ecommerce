@@ -33,7 +33,7 @@
                             <input type="file" name="m_Slide" class="form-control" id="Img" value="{{ old('m_Slide', $mSlider->slider_img) }}">
                         </div>
                         <div class="col-md-4">
-                            <img src="{{ asset('/storage/'.$mSlider->slider_img) }}" class="slide_img" alt="{{ $mSlider->slider_img }}">
+                            <img src="{{ asset('storage/sliders/'.$mSlider->slider_img) }}" class="slide_img" alt="{{ $mSlider->slider_img }}">
                         </div>
                     </div>
                 </div>

@@ -6,21 +6,21 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{ asset('/storage/'.$fSlider->slider_img) }}" class="d-block w-100" alt="...">
+      <img src="{{ asset('storage/sliders/'.$fSlider->slider_img) }}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block text-dark">
         <h5>{{ $fSlider->slider_label }}</h5>
         <p>{{ $fSlider->slider_desc }}</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="{{ asset('/storage/'.$mSlider->slider_img) }}" class="d-block w-100" alt="...">
+      <img src="{{ asset('storage/sliders/'.$mSlider->slider_img) }}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block text-dark">
         <h5>{{ $mSlider->slider_label }}</h5>
         <p>{{ $mSlider->slider_desc }}</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="{{ asset('/storage/'.$lSlider->slider_img) }}" class="d-block w-100" alt="...">
+      <img src="{{ asset('storage/sliders/'.$lSlider->slider_img) }}" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block text-dark">
         <h5>{{ $lSlider->slider_label }}</h5>
         <p>{{ $lSlider->slider_desc }}</p>
